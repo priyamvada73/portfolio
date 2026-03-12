@@ -3,5 +3,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  base: '/',
+  // Use /portfolio/ for GitHub Pages until custom domain is live
+  // Switch back to '/' once custom domain is configured
+  base: mode === 'production' ? '/portfolio/' : '/',
 }))
