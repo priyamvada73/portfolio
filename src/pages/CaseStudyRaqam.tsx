@@ -44,7 +44,7 @@ export default function CaseStudyRaqam() {
           <a href="/" style={{ fontFamily: '"Cormorant Garamond",Georgia,serif', fontSize: '1.1rem', fontWeight: 600, color: 'var(--white)', textDecoration: 'none', letterSpacing: '.04em', cursor: 'none' }}>
             PRIYAMVADA <span style={{ color: 'var(--gold)' }}>·</span> UX
           </a>
-          <a href="/#work" style={{ fontSize: '.72rem', fontWeight: 400, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--muted)', textDecoration: 'none', cursor: 'none', transition: 'color .2s' }}
+          <a href="/" style={{ fontSize: '.72rem', fontWeight: 400, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--muted)', textDecoration: 'none', cursor: 'none', transition: 'color .2s' }}
             onMouseEnter={e => (e.currentTarget.style.color = 'var(--gold)')}
             onMouseLeave={e => (e.currentTarget.style.color = 'var(--muted)')}
           >
@@ -179,7 +179,7 @@ export default function CaseStudyRaqam() {
               Get in touch →
             </a>
             <a
-              href="/#work"
+              href="/"
               style={{ display: 'inline-block', fontSize: '.72rem', fontWeight: 500, letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--gold)', border: '1px solid var(--border)', padding: '13px 28px', textDecoration: 'none', cursor: 'none', transition: 'border-color .25s,color .25s' }}
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--gold)'; (e.currentTarget as HTMLElement).style.color = 'var(--white)' }}
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLElement).style.color = 'var(--gold)' }}

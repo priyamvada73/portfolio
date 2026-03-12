@@ -25,18 +25,24 @@ const S: Record<string, React.CSSProperties> = {
   },
 }
 
+const scrollTo = (id: string, e: React.MouseEvent) => {
+  e.preventDefault()
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+}
+
 export default function Navigation() {
   return (
     <nav style={S.nav} aria-label="Main navigation">
-      <a href="#" style={S.logo}>
+      <a href="#/" style={S.logo} onClick={e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
         PRIYAMVADA <span style={{color:'var(--gold)'}}>·</span> UX
       </a>
 
       <ul style={S.navList}>
-        {([['#work','Work'],['#process','Process'],['#about','About']] as [string,string][]).map(([href,label]) => (
+        {([['work','Work'],['process','Process'],['about','About']] as [string,string][]).map(([id,label]) => (
           <li key={label}>
             <a
-              href={href}
+              href="#"
+              onClick={e => scrollTo(id, e)}
               style={S.navLink}
               onMouseEnter={e=>(e.currentTarget.style.color='var(--gold)')}
               onMouseLeave={e=>(e.currentTarget.style.color='var(--muted)')}

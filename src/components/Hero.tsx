@@ -57,7 +57,8 @@ export default function Hero() {
       {/* CTA */}
       <div style={{position:'relative',zIndex:1,opacity:0,animation:'rise .7s .64s forwards'}}>
         <a
-          href="#work"
+          href="#"
+          onClick={e => { e.preventDefault(); document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' }) }}
           style={{
             display:'inline-block',
             fontSize:'.75rem',fontWeight:500,letterSpacing:'.16em',textTransform:'uppercase',
