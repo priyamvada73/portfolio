@@ -1,5 +1,19 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
+const FILTERS = ['All','Fintech','Mobile','AI','B2B','Design Systems'] as const
+type Filter = typeof FILTERS[number]
+
+const PROJECT_TAGS: Record<string,Filter[]> = {
+  raqam:  ['Fintech','Mobile'],
+  bnpl:   ['Fintech','Mobile'],
+  crypto: ['B2B'],
+  ai:     ['AI','B2B'],
+  wa:     ['AI','Mobile'],
+  ent:    ['B2B'],
+  ds:     ['Design Systems','B2B'],
+  pet:    ['Design Systems'],
+}
 
 function useReveal() {
   const ref = useRef<HTMLElement>(null)
@@ -16,9 +30,15 @@ function useReveal() {
   return ref
 }
 
+function matches(cardKey: string, filter: Filter) {
+  if (filter === 'All') return true
+  return PROJECT_TAGS[cardKey]?.includes(filter) ?? false
+}
+
 export default function Work() {
   const sectionRef = useReveal() as React.RefObject<HTMLElement>
   const navigate = useNavigate()
+  const [filter, setFilter] = useState<Filter>('All')
 
   return (
     <section
@@ -37,9 +57,29 @@ export default function Work() {
         </p>
       </div>
 
+      {/* filter bar */}
+      <div className="rv d2" style={{ display:'flex',gap:8,marginBottom:28,flexWrap:'wrap' }}>
+        {FILTERS.map(f=>(
+          <button
+            key={f}
+            onClick={()=>setFilter(f)}
+            style={{
+              fontSize:'.62rem',fontWeight:500,letterSpacing:'.16em',textTransform:'uppercase',
+              padding:'6px 16px',borderRadius:20,cursor:'none',
+              border: f===filter ? '1px solid var(--gold)' : '1px solid var(--bdr2)',
+              background: f===filter ? 'rgba(201,168,76,.1)' : 'transparent',
+              color: f===filter ? 'var(--gold)' : 'var(--muted)',
+              transition:'all .25s ease',
+            }}
+          >
+            {f}
+          </button>
+        ))}
+      </div>
+
       <div className="bento">
         {/* 01 RAQAM */}
-        <article className="card b-raqam bg-raqam rv d1" style={{cursor:'none'}} onClick={()=>navigate('/case-study/raqam')}>
+        <article className="card b-raqam bg-raqam rv d1" style={{cursor:'none',opacity:matches('raqam',filter)?1:.15,transition:'opacity .35s ease'}} onClick={()=>navigate('/case-study/raqam')}>
           <div className="cl" /><div className="cn">01</div>
           <button onClick={e=>{e.stopPropagation();navigate('/case-study/raqam')}} className="ca" aria-label="Raqam case study" style={{zIndex:2,border:'none',background:'transparent',cursor:'none'}}>↗</button>
           <div className="ci" style={{zIndex:1,pointerEvents:'none'}}>
@@ -77,7 +117,7 @@ export default function Work() {
         </article>
 
         {/* 02 BNPL */}
-        <article className="card b-bnpl bg-bnpl rv d1">
+        <article className="card b-bnpl bg-bnpl rv d1" style={{opacity:matches('bnpl',filter)?1:.15,transition:'opacity .35s ease'}}>
           <div className="cl" /><div className="cn">02</div>
           <a href="#" className="ca">↗</a>
           <div className="ci">
@@ -119,7 +159,7 @@ export default function Work() {
         </article>
 
         {/* 03 CRYPTO */}
-        <article className="card b-crypto bg-crypto rv d1">
+        <article className="card b-crypto bg-crypto rv d1" style={{opacity:matches('crypto',filter)?1:.15,transition:'opacity .35s ease'}}>
           <div className="cl" /><div className="cn">03</div>
           <a href="#" className="ca">↗</a>
           <div className="ci">
@@ -133,7 +173,7 @@ export default function Work() {
         </article>
 
         {/* 04 AI */}
-        <article className="card b-ai bg-ai rv d2">
+        <article className="card b-ai bg-ai rv d2" style={{opacity:matches('ai',filter)?1:.15,transition:'opacity .35s ease'}}>
           <div className="cl" /><div className="cn">04</div>
           <a href="#" className="ca">↗</a>
           <div className="ci">
@@ -146,7 +186,7 @@ export default function Work() {
         </article>
 
         {/* 05 WHATSAPP */}
-        <article className="card b-wa bg-wa rv d3">
+        <article className="card b-wa bg-wa rv d3" style={{opacity:matches('wa',filter)?1:.15,transition:'opacity .35s ease'}}>
           <div className="cl" /><div className="cn">05</div>
           <a href="#" className="ca">↗</a>
           <div className="ci">
@@ -160,7 +200,7 @@ export default function Work() {
         </article>
 
         {/* 06 ENTERPRISE */}
-        <article className="card b-ent bg-ent rv d1">
+        <article className="card b-ent bg-ent rv d1" style={{opacity:matches('ent',filter)?1:.15,transition:'opacity .35s ease'}}>
           <div className="cl" /><div className="cn">06</div>
           <a href="#" className="ca">↗</a>
           <div className="ci">
@@ -196,7 +236,7 @@ export default function Work() {
         </article>
 
         {/* 07 DESIGN SYSTEM strip */}
-        <article className="card b-ds bg-ds rv d1">
+        <article className="card b-ds bg-ds rv d1" style={{opacity:matches('ds',filter)?1:.15,transition:'opacity .35s ease'}}>
           <div className="cl" /><div className="cn">07</div>
           <a href="#" className="ca">↗</a>
           <div style={{ position:'absolute',inset:0,padding:'28px 36px',display:'flex',alignItems:'center',justifyContent:'space-between',gap:40 }}>
@@ -218,7 +258,7 @@ export default function Work() {
         </article>
 
         {/* 08 PET PROTECT */}
-        <article className="card b-pet bg-pet rv d1" style={{cursor:'none'}} onClick={()=>navigate('/case-study/pet-protect')}>
+        <article className="card b-pet bg-pet rv d1" style={{cursor:'none',opacity:matches('pet',filter)?1:.15,transition:'opacity .35s ease'}} onClick={()=>navigate('/case-study/pet-protect')}>
           <div className="cl" style={{background:'#5BB9C4'}} /><div className="cn">08</div>
           <button onClick={e=>{e.stopPropagation();navigate('/case-study/pet-protect')}} className="ca" aria-label="Pet Protect case study" style={{zIndex:2,border:'none',background:'transparent',cursor:'none'}}>↗</button>
           <div style={{ position:'absolute',inset:0,padding:'28px 36px',display:'flex',alignItems:'center',justifyContent:'space-between',gap:40 }}>
