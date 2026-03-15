@@ -5,5 +5,5 @@ export default defineConfig(({ mode }) => ({
   plugins: [react()],
   // Use /portfolio/ for GitHub Pages until custom domain is live
   // Switch back to '/' once custom domain is configured
-  base: mode === 'production' ? '/portfolio/' : '/',
+  base: mode === 'production' ? '/2026/' : '/',
 }))
